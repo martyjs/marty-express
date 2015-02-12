@@ -2,41 +2,65 @@
 
 [Marty](http://martyjs.org) middleware for express.js for isomorphic applications
 
-## Quick start
+##Usage
+
+```js
+var Marty = require('marty');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+
+var routes = (
+  <Route handler={RouteHandler}>
+    <Route name='foo' path='/foo/:id' handler={Foo} />
+    <Route name='var' path='/bar/:id' handler={Bar} />
+  </Route>
+);
+
+var app = express();
+
+app.use(require('marty-express')({
+  routes: routes, // required
+  view: 'foo', // name of view to render, default: index
+  local: 'bar', // name of local variable in view, default: body
+  marty: ..., // instance of Marty to use, default: require('marty')
+}));
+```
+
+##Quick start
 
 ```
 make bootstrap      #Install all dependencies
 make test           #Run tests
 ```
 
-## Git Commit Messages
+##Git Commit Messages
 
 * Use the present tense ("Add feature" not "Added feature")
 * Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
 * Limit the first line to 72 characters or less
 * Reference issues and pull requests liberally
 * Consider starting the commit message with an applicable emoji:
-    * :lipstick: `:lipstick:` when improving the format/structure of the code
-    * :racehorse: `:racehorse:` when improving performance
-    * :non-potable_water: `:non-potable_water:` when plugging memory leaks
-    * :memo: `:memo:` when writing docs
-    * :penguin: `:penguin:` when fixing something on Linux
-    * :apple: `:apple:` when fixing something on Mac OS
-    * :checkered_flag: `:checkered_flag:` when fixing something on Windows
-    * :bug: `:bug:` when fixing a bug
-    * :fire: `:fire:` when removing code or files
-    * :green_heart: `:green_heart:` when fixing the CI build
-    * :white_check_mark: `:white_check_mark:` when adding tests
-    * :lock: `:lock:` when dealing with security
-    * :arrow_up: `:arrow_up:` when upgrading dependencies
-    * :arrow_down: `:arrow_down:` when downgrading dependencies
+  * :lipstick: `:lipstick:` when improving the format/structure of the code
+  * :racehorse: `:racehorse:` when improving performance
+  * :non-potable_water: `:non-potable_water:` when plugging memory leaks
+  * :memo: `:memo:` when writing docs
+  * :penguin: `:penguin:` when fixing something on Linux
+  * :apple: `:apple:` when fixing something on Mac OS
+  * :checkered_flag: `:checkered_flag:` when fixing something on Windows
+  * :bug: `:bug:` when fixing a bug
+  * :fire: `:fire:` when removing code or files
+  * :green_heart: `:green_heart:` when fixing the CI build
+  * :white_check_mark: `:white_check_mark:` when adding tests
+  * :lock: `:lock:` when dealing with security
+  * :arrow_up: `:arrow_up:` when upgrading dependencies
+  * :arrow_down: `:arrow_down:` when downgrading dependencies
 
 (From [atom](https://atom.io/docs/latest/contributing#git-commit-messages))
 
-## Maintainers
+##Maintainers
 
 * [James Hollingworth](http://github.com/jhollingworth)
 
-## License
+##License
 
 * [MIT](https://raw.github.com/jhollingworth/marty-express/master/LICENSE)
