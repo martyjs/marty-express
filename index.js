@@ -1,14 +1,25 @@
-
 var React = require('react');
+var Router = require('react-router');
 
-function marty(app, router) {
-  app.use(function (req, res) {
-    console.log('router url', req.url);
-    router.run(req.url, function (Handler) {
-      var content = React.renderToString(React.createElement(Handler));
-      res.render('main', {content: content});
+function marty(options) {
+  return function (req, res, next) {
+    var router = Router.create({
+      location: req.url,
+      routes: options.routes
     });
-  });
+
+    if (!router.match(req.url)) {
+      return next();
+    }
+
+    router.run(function (Handler) {
+      var locals = {};
+      var body = React.renderToString(React.createElement(Handler));
+
+      locals[options.local || 'body'] = body;
+      res.render(options.view || 'index', locals);
+    });
+  };
 }
 
 module.exports = marty;
