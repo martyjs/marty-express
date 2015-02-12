@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/jhollingworth/marty-express.svg?branch=master)](https://travis-ci.org/jhollingworth/marty-express)
 
-[Marty](http://martyjs.org) middleware for express.js for isomorphic applications
+[express](http://expressjs.com) middleware for building isomorphic applications with [Marty](http://martyjs.org) & [react-router](https://github.com/rackt/react-router).
 
 ##Usage
 
