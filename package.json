@@ -1,0 +1,55 @@
+{
+  "name": "marty-express",
+  "version": "0.0.1",
+  "description": "express.js middleware for Marty.js",
+  "main": "index.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jhollingworth/marty-express.git"
+  },
+  "keywords": [
+    "react",
+    "flux",
+    "express"
+  ],
+  "dependencies": {
+    "express": "^4.11.2",
+    "marty": "^0.8.0",
+    "react": "^0.12.0",
+    "react-router": "^0.12.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.9.3",
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "cheerio": "^0.18.0",
+    "cookie-parser": "^1.3.3",
+    "ejs": "^2.2.4",
+    "jsxcs": "^0.2.1",
+    "jsxhint": "^0.10.0",
+    "mocha": "^1.21.4",
+    "mocha-spec-cov": "0.0.3",
+    "node-jsx": "^0.12.4",
+    "request": "^2.53.0",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0",
+    "when": "^3.7.2"
+  },
+  "author": "James Hollingworth",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/jhollingworth/marty-express/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/jhollingworth/marty-express/issues"
+  },
+  "homepage": "https://martyjs.org"
+}
