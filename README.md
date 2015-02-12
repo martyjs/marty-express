@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jhollingworth/marty-express.svg?branch=master)](https://travis-ci.org/jhollingworth/marty-express)
+
 [Marty](http://martyjs.org) middleware for express.js for isomorphic applications
 
 ## Quick start
