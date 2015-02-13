@@ -15,7 +15,6 @@ module.exports = function () {
   app.set('view engine', 'ejs');
   app.set('views', path.join(__dirname, 'views'));
 
-
   app.start = function () {
     return when.promise(function (resolve) {
       app.server = app.listen(0, onStarted);
