@@ -46,12 +46,7 @@ module.exports = function (options) {
     }
   });
 
-
   return function (req, res, next) {
-    // var routes = appRoutes(req.app);
-
-    // console.log(routes);
-
     var router = Router.create({
       location: req.url,
       routes: options.routes
@@ -75,21 +70,4 @@ module.exports = function (options) {
       });
     });
   };
-
-  // function appRoutes(app) {
-  //   var route, routes = [];
-
-  //   app._router.stack.forEach(function (middleware) {
-  //     if (middleware.route) {
-  //       routes.push(middleware.route);
-  //     } else if (middleware.name === 'router') {
-  //       middleware.handle.stack.forEach(function (handler) {
-  //         route = handler.route;
-  //         route && routes.push(route);
-  //       });
-  //     }
-  //   });
-
-  //   return routes;
-  // }
 };
