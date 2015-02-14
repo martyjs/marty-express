@@ -1,10 +1,12 @@
+var sinon = require('sinon');
+var _ = require('underscore');
 var marty = require('../index');
 var cheerio = require('cheerio');
 var http = require('./lib/http');
 var expect = require('chai').expect;
 
-describe.only('HttpStateSource', function () {
-  var $, res, server, expectedMessage;
+describe('HttpStateSource', function () {
+  var $, res, server, expectedMessage, expectedHeaders, actualHeaders, handler;
 
   beforeEach(function () {
     server = require('./fixtures/server')();
@@ -14,9 +16,12 @@ describe.only('HttpStateSource', function () {
 
     expectedMessage = 'this came from the API';
 
-    server.get('/api/foos/:id', function (req, res) {
+    handler = sinon.spy(function (req, res) {
+      actualHeaders = req.headers;
       res.json({ id: req.params.id, message: expectedMessage });
     });
+
+    server.get('/api/foos/:id', handler);
 
     return server.start();
   });
@@ -26,12 +31,28 @@ describe.only('HttpStateSource', function () {
 
     beforeEach(function () {
       expectedId = 123;
+      expectedHeaders = {
+        'x-foo': 'Bar',
+        'user-agent': 'Mozilla/5.0'
+      };
 
-      return getHtml('remote-foo/' + expectedId);
+      return getHtml('remote-foo/' + expectedId, {
+        headers: expectedHeaders
+      });
     });
 
     it('should return a response', function () {
       expect(res.statusCode).to.equal(200);
+    });
+
+    it('should have called the handler', function () {
+      expect(handler).to.have.been.calledOnce;
+    });
+
+    it('should have propagated the headers', function () {
+      var headers = _.pick(actualHeaders, Object.keys(expectedHeaders));
+
+      expect(headers).to.eql(expectedHeaders);
     });
 
     it('should render the contents', function () {
@@ -39,16 +60,16 @@ describe.only('HttpStateSource', function () {
     });
   });
 
-  function get(route) {
-    return http(server).get(route).then(function (_res) {
+  function get(url, options) {
+    return http(server).get(url, options).then(function (_res) {
       res = _res;
 
       return res;
     });
   }
 
-  function getHtml(route) {
-    return get(route).then(function () {
+  function getHtml(url, options) {
+    return get(url, options).then(function () {
       $ = cheerio.load(res.body);
     });
   }
