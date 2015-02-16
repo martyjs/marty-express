@@ -23,6 +23,17 @@ var FooStore = Marty.createStore({
         return FooAPI(this).getFoo(id);
       }
     });
+  },
+  getRemoteFoo: function (id) {
+    return this.fetch({
+      id: id,
+      locally: function () {
+        return this.state[id];
+      },
+      remotely: function () {
+        return FooAPI(this).getRemoteFoo(id);
+      }
+    });
   }
 });
 

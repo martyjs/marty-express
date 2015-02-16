@@ -3,9 +3,9 @@ var request = require('request');
 
 module.exports = function (server) {
   return {
-    get: function (route) {
+    get: function (path, options) {
       return when.promise(function (resolve, reject) {
-        request(server.host + '/' + route, function (error, response, body) {
+        request(server.host + '/' + path, options, function (error, response, body) {
           if (error) {
             reject(error);
           } else {

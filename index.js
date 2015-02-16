@@ -1,5 +1,13 @@
 var React = require('react');
+var _ = require('underscore');
 var Router = require('react-router');
+
+var HEADERS_TO_IGNORE = [
+  'accept',
+  'accept-encoding',
+  'host',
+  'connection'
+];
 
 module.exports = function (options) {
   options = options || {};
@@ -8,8 +16,41 @@ module.exports = function (options) {
     throw new Error('routes is required');
   }
 
+  var Marty = options.marty || require('marty');
+  var HttpStateSource = require('marty/http/stateSource');
+
+  HttpStateSource.use({
+    priority: 0.00000000001,
+    before: function (req) {
+      var context = this.__context;
+
+      if (!context || !context.req) {
+        return;
+      }
+
+      // Don't change fully qualified urls
+      if (!/^https?:\/\//.test(req.url)) {
+        req.url = getBaseUrl(context.req) + req.url;
+      }
+
+      // Add all headers from original request
+      _.extend(req.headers, headers());
+
+      function getBaseUrl(req) {
+        return req.protocol + '://' + req.get('host');
+      }
+
+      function headers() {
+        return _.omit(context.req.headers, HEADERS_TO_IGNORE);
+      }
+    }
+  });
+
+
   return function (req, res, next) {
-    var Marty = options.marty || require('marty');
+    // var routes = appRoutes(req.app);
+
+    // console.log(routes);
 
     var router = Router.create({
       location: req.url,
@@ -21,7 +62,7 @@ module.exports = function (options) {
     }
 
     router.run(function (Handler) {
-      var context = Marty.createContext();
+      var context = Marty.createContext(req);
       var createElement = function () {
         return React.createElement(Handler);
       };
@@ -34,4 +75,21 @@ module.exports = function (options) {
       });
     });
   };
+
+  // function appRoutes(app) {
+  //   var route, routes = [];
+
+  //   app._router.stack.forEach(function (middleware) {
+  //     if (middleware.route) {
+  //       routes.push(middleware.route);
+  //     } else if (middleware.name === 'router') {
+  //       middleware.handle.stack.forEach(function (handler) {
+  //         route = handler.route;
+  //         route && routes.push(route);
+  //       });
+  //     }
+  //   });
+
+  //   return routes;
+  // }
 };
