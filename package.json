@@ -20,7 +20,7 @@
   ],
   "dependencies": {
     "express": "^4.11.2",
-    "marty": "jhollingworth/marty#iso",
+    "marty": "jhollingworth/marty#v0.9",
     "react": "^0.12.0",
     "react-router": "^0.12.0",
     "underscore": "^1.7.0"

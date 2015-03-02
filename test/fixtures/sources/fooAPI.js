@@ -8,7 +8,7 @@ var FooAPI = Marty.createStateSource({
     var self = this;
     return new Promise(function (resolve) {
       setTimeout(function () {
-        FooActionCreators(self).recieveFoo({
+        FooActionCreators.for(self).recieveFoo({
           id: id,
           message: 'bar'
         });
@@ -18,7 +18,7 @@ var FooAPI = Marty.createStateSource({
   },
   getRemoteFoo: function (id) {
     return this.get('/api/foos/' + id).then(function (res) {
-      FooActionCreators(this).recieveFoo(res.body);
+      FooActionCreators.for(this).recieveFoo(res.body);
     }.bind(this));
   }
 });

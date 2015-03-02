@@ -1,4 +1,3 @@
-var React = require('react');
 var _ = require('underscore');
 var Router = require('react-router');
 
@@ -17,12 +16,11 @@ module.exports = function (options) {
   }
 
   var Marty = options.marty || require('marty');
-  var HttpStateSource = require('marty/http/stateSource');
 
-  HttpStateSource.use({
+  Marty.HttpStateSource.addHook({
     priority: 0.00000000001,
     before: function (req) {
-      var context = this.__context;
+      var context = this.context;
 
       if (!context || !context.req) {
         return;
@@ -48,10 +46,6 @@ module.exports = function (options) {
 
 
   return function (req, res, next) {
-    // var routes = appRoutes(req.app);
-
-    // console.log(routes);
-
     var router = Router.create({
       location: req.url,
       routes: options.routes
@@ -63,33 +57,18 @@ module.exports = function (options) {
 
     router.run(function (Handler) {
       var context = Marty.createContext(req);
-      var createElement = function () {
-        return React.createElement(Handler);
+
+      var renderOptions = {
+        type: Handler,
+        context: context,
+        timeout: options.timeout
       };
 
-      Marty.renderToString(createElement, context).then(function (html) {
+      Marty.renderToString(renderOptions).then(function (html) {
         var locals = {};
         locals[options.local || 'body'] = html;
         res.render(options.view || 'index', locals).end();
-        context.dispose();
       });
     });
   };
-
-  // function appRoutes(app) {
-  //   var route, routes = [];
-
-  //   app._router.stack.forEach(function (middleware) {
-  //     if (middleware.route) {
-  //       routes.push(middleware.route);
-  //     } else if (middleware.name === 'router') {
-  //       middleware.handle.stack.forEach(function (handler) {
-  //         route = handler.route;
-  //         route && routes.push(route);
-  //       });
-  //     }
-  //   });
-
-  //   return routes;
-  // }
 };

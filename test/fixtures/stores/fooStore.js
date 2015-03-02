@@ -20,7 +20,7 @@ var FooStore = Marty.createStore({
         return this.state[id];
       },
       remotely: function () {
-        return FooAPI(this).getFoo(id);
+        return FooAPI.for(this).getFoo(id);
       }
     });
   },
@@ -31,7 +31,7 @@ var FooStore = Marty.createStore({
         return this.state[id];
       },
       remotely: function () {
-        return FooAPI(this).getRemoteFoo(id);
+        return FooAPI.for(this).getRemoteFoo(id);
       }
     });
   }

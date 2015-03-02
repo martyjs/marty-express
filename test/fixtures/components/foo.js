@@ -6,7 +6,7 @@ var FooStateMixin = Marty.createStateMixin({
   listenTo: FooStore,
   getState: function () {
     return {
-      foo: FooStore(this).getFoo(this.props.id)
+      foo: FooStore.for(this).getFoo(this.props.id)
     };
   }
 });
@@ -28,7 +28,6 @@ var Foo = React.createClass({
 
     return <div id={this.props.id} className='foo'>{body}</div>;
   }
-
 });
 
 module.exports = Foo;
