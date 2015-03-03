@@ -64,11 +64,25 @@ module.exports = function (options) {
         timeout: options.timeout
       };
 
-      Marty.renderToString(renderOptions).then(function (html) {
+      Marty
+        .renderToString(renderOptions)
+        .then(onRendered)
+        .catch(onFailedToRender);
+
+      function onRendered(html) {
         var locals = {};
         locals[options.local || 'body'] = html;
-        res.render(options.view || 'index', locals).end();
-      });
+        res.render(options.view || 'index', locals);
+      }
+
+      function onFailedToRender(error) {
+        if (_.isFunction(options.error)) {
+          options.error(req, res, next, error);
+        } else {
+          console.error('Failed to render ' + req.url, error);
+          res.sendStatus(500).end();
+        }
+      }
     });
   };
 };
