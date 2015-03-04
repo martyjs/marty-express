@@ -44,7 +44,6 @@ module.exports = function (options) {
     }
   });
 
-
   return function (req, res, next) {
     var router = Router.create({
       location: req.url,
@@ -55,12 +54,13 @@ module.exports = function (options) {
       return next();
     }
 
-    router.run(function (Handler) {
+    router.run(function (Handler, state) {
       var context = Marty.createContext(req);
 
       var renderOptions = {
         type: Handler,
         context: context,
+        props: state.params,
         timeout: options.timeout
       };
 
