@@ -1,5 +1,5 @@
+var _ = require('lodash');
 var sinon = require('sinon');
-var _ = require('underscore');
 var marty = require('../index');
 var cheerio = require('cheerio');
 var http = require('./lib/http');

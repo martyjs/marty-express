@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var Router = require('react-router');
 
 var HEADERS_TO_IGNORE = [
@@ -69,10 +69,17 @@ module.exports = function (options) {
         .then(onRendered)
         .catch(onFailedToRender);
 
-      function onRendered(html) {
+      function onRendered(renderResult) {
         var locals = {};
+        var html = renderResult.html;
         locals[options.local || 'body'] = html;
         res.render(options.view || 'index', locals);
+
+        if (_.isFunction(options.rendered)) {
+          options.rendered(_.extend({
+            req: req
+          }, renderResult));
+        }
       }
 
       function onFailedToRender(error) {
