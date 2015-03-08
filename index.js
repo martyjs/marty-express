@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var Router = require('react-router');
+var Router = require('react-router/build/npm');
 
 var HEADERS_TO_IGNORE = [
   'accept',

@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var Router = require('react-router');
+var Router = require('react-router/build/npm');
 var Foo = require('./components/foo');
 var Ping = require('./components/ping');
 var RemoteFoo = require('./components/remoteFoo');

@@ -37,11 +37,14 @@
     "request": "^2.53.0",
     "sinon": "^1.10.3",
     "sinon-chai": "^2.5.0",
-    "when": "^3.7.2"
+    "react": ">=0.13.0-rc1",
+    "when": "^3.7.2",
+    "react-router": "git://github.com/rackt/react-router#0.13-compat",
+    "marty": "git://github.com/jhollingworth/marty#v0.9"
   },
   "peerDependencies": {
     "marty": "*",
-    "react": "*"
+    "react-router": "*"
   },
   "author": "James Hollingworth",
   "licenses": [
