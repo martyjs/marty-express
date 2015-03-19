@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var ServerCookies = require('./serverCookies');
 var Router = require('react-router/build/npm');
 
 var HEADERS_TO_IGNORE = [
@@ -16,6 +17,10 @@ module.exports = function (options) {
   }
 
   var Marty = options.marty || require('marty');
+
+  Marty.CookieStateSource.setCookieFactory(function (context) {
+    return new ServerCookies(context.req, context.res);
+  });
 
   Marty.HttpStateSource.addHook({
     priority: 0.00000000001,

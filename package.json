@@ -23,6 +23,7 @@
     "lodash": "^3.0.0"
   },
   "devDependencies": {
+    "babel": "^4.7.16",
     "body-parser": "^1.9.3",
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
@@ -31,16 +32,15 @@
     "ejs": "^2.2.4",
     "jsxcs": "^0.2.1",
     "jsxhint": "^0.10.0",
+    "marty": "^0.9.0",
     "mocha": "^1.21.4",
     "mocha-spec-cov": "0.0.3",
-    "node-jsx": "^0.12.4",
+    "react": "^0.13.0",
+    "react-router": "git://github.com/nhunzaker/react-router",
     "request": "^2.53.0",
-    "sinon": "^1.10.3",
-    "sinon-chai": "^2.5.0",
-    "react": ">=0.13.0-rc1",
-    "when": "^3.7.2",
-    "react-router": "git://github.com/rackt/react-router#0.13-compat",
-    "marty": "git://github.com/jhollingworth/marty#v0.9"
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.7.0",
+    "when": "^3.7.2"
   },
   "peerDependencies": {
     "marty": "*",
