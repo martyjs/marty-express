@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var middleware = require('../index');
 
 describe('CookieStateSource', function ( ) {
-  var Marty, source, expectedKey, expectedValue, req, res, context;
+  var Marty, source, expectedKey, expectedValue, req, res;
 
   beforeEach(function () {
     Marty = require('marty').createInstance();
@@ -19,15 +19,13 @@ describe('CookieStateSource', function ( ) {
       clearCookie: sinon.spy()
     };
 
-    context = {
-      req: req,
-      res: res
-    };
-
     source = Marty.createStateSource({
       id: 'ServerCookies',
       type: 'cookie',
-      context: context
+      context: {
+        req: req,
+        res: res
+      }
     });
   });
 

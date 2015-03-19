@@ -22,6 +22,10 @@ module.exports = function (options) {
     return new ServerCookies(context.req, context.res);
   });
 
+  Marty.LocationStateSource.setLocationFactory(function (context) {
+    return _.pick(context.req, 'url', 'protocol', 'query', 'path', 'hostname');
+  });
+
   Marty.HttpStateSource.addHook({
     priority: 0.00000000001,
     before: function (req) {
