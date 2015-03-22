@@ -36,15 +36,15 @@
     "mocha": "^1.21.4",
     "mocha-spec-cov": "0.0.3",
     "react": "^0.13.0",
-    "react-router": "git://github.com/nhunzaker/react-router",
+    "react-router": "^0.13.0",
     "request": "^2.53.0",
     "sinon": "^1.14.1",
     "sinon-chai": "^2.7.0",
     "when": "^3.7.2"
   },
   "peerDependencies": {
-    "marty": "*",
-    "react-router": "*"
+    "marty": "^0.9.0",
+    "react-router": "^0.13.0"
   },
   "author": "James Hollingworth",
   "licenses": [

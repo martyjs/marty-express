@@ -11,7 +11,9 @@ lint:
 	@$(BIN)/jsxcs $(SRC);
 	@$(BIN)/jsxhint $(SRC);
 
-test: lint
+test: lint quick-test
+
+quick-test:
 	@$(BIN)/mocha test
 
 release: test
