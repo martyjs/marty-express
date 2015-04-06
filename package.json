@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:jhollingworth/marty-express.git"
+    "url": "git@github.com:martyjs/marty-express.git"
   },
   "keywords": [
     "react",
@@ -50,11 +50,11 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://raw.github.com/jhollingworth/marty-express/master/LICENSE"
+      "url": "https://raw.github.com/martyjs/marty-express/master/LICENSE"
     }
   ],
   "bugs": {
-    "url": "https://github.com/jhollingworth/marty-express/issues"
+    "url": "https://github.com/martyjs/marty-express/issues"
   },
   "homepage": "https://martyjs.org"
 }
