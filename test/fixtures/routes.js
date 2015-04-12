@@ -6,7 +6,7 @@ var RemoteFoo = require('./components/remoteFoo');
 
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
-
+var Redirect = Router.Redirect;
 
 var App = React.createClass({
   render: function () {
@@ -18,10 +18,11 @@ var App = React.createClass({
 
 module.exports = function () {
   return (
-    <Route handler={App}>
+    <Route name="root" handler={App}>
       <Route name='foo' path='/foo/:id' handler={routeContainer(Foo)} />
       <Route name='ping' path='/ping/:message' handler={routeContainer(Ping)} />
       <Route name='remote-foo' path='/remote-foo/:id' handler={routeContainer(RemoteFoo)} />
+      <Redirect from="/redirect" to="root" />
     </Route>
   );
 };
