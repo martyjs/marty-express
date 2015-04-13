@@ -56,7 +56,8 @@ module.exports = function (options) {
   return function (req, res, next) {
     var router = Router.create({
       location: req.url,
-      routes: options.routes
+      routes: options.routes,
+      onAbort: onAbort
     });
 
     if (!router.match(req.url)) {
@@ -103,5 +104,11 @@ module.exports = function (options) {
         }
       }
     });
+
+    function onAbort(abortReason) {
+      if (abortReason.constructor.name === 'Redirect') {
+        return res.redirect(302, router.makePath(abortReason.to, abortReason.params, abortReason.query));
+      }
+    }
   };
 };

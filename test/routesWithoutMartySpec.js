@@ -54,8 +54,21 @@ describe('Routes without marty', function () {
     });
   });
 
-  function get(route) {
-    return http(server).get(route).then(function (_res) {
+  describe('when following a redirect', function () {
+    beforeEach(function () {
+      var options = {
+        followRedirect: false
+      };
+      return get('redirect', options);
+    });
+
+    it('should return a 302 status code', function () {
+      expect(res.statusCode).to.equal(302);
+    });
+  });
+
+  function get(route, options) {
+    return http(server).get(route, options).then(function (_res) {
       res = _res;
 
       return res;
