@@ -65,10 +65,7 @@ module.exports = function (options) {
     }
 
     router.run(function (Handler, state) {
-      var context = Marty.createContext();
-
-      context.req = req;
-      context.res = res;
+      var context = Marty.createContext({req: req, res: res});
 
       var renderOptions = {
         type: Handler,
