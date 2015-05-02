@@ -17,7 +17,7 @@ ServerCookies.prototype = {
       return this.req.cookies[key];
     }
 
-    log.warn(
+    console.warn(
       'Warning: Could not find cookies in req. Do you have the cookie-parser middleware ' +
       '(https://www.npmjs.com/package/cookie-parser) installed?'
     );
