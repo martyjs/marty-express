@@ -99,7 +99,7 @@ module.exports = function (options) {
         if (_.isFunction(options.error)) {
           options.error(req, res, next, error);
         } else {
-          console.error('Failed to render ' + req.url, error);
+          console.error('Failed to render ' + req.url, error.stack);
           res.sendStatus(500).end();
         }
       }
