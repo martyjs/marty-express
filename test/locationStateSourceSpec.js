@@ -1,20 +1,21 @@
+var Marty = require('marty');
 var expect = require('chai').expect;
 var middleware = require('../index');
 
 describe('LocationStateSource', function () {
-  var source, req, Marty;
+  var source, req;
 
   beforeEach(function () {
-    Marty = require('marty').createInstance();
-
-    middleware({ marty: Marty, routes: [] });
+    middleware({ application: Marty.Application, routes: [] });
 
     req = {};
 
-    source = Marty.createStateSource({
-      id: 'Location',
-      type: 'location',
-      context: {
+    var LocationSource = Marty.createStateSource({
+      type: 'location'
+    });
+
+    source = new LocationSource({
+      app: {
         req: req
       }
     });

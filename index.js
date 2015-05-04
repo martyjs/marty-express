@@ -1,4 +1,6 @@
 var _ = require('lodash');
+var Marty = require('marty');
+var React = require('react');
 var Router = require('react-router');
 var ServerCookies = require('./serverCookies');
 
@@ -16,28 +18,26 @@ module.exports = function (options) {
     throw new Error('routes is required');
   }
 
-  var Marty = options.marty || require('marty');
-
-  Marty.CookieStateSource.setCookieFactory(function (context) {
-    return new ServerCookies(context.req, context.res);
+  Marty.CookieStateSource.setCookieFactory(function (app) {
+    return new ServerCookies(app.req, app.res);
   });
 
-  Marty.LocationStateSource.setLocationFactory(function (context) {
-    return _.pick(context.req, 'url', 'protocol', 'query', 'path', 'hostname');
+  Marty.LocationStateSource.setLocationFactory(function (app) {
+    return _.pick(app.req, 'url', 'protocol', 'query', 'path', 'hostname');
   });
 
   Marty.HttpStateSource.addHook({
     priority: 0.00000000001,
     before: function (req) {
-      var context = this.context;
+      var app = this.app;
 
-      if (!context || !context.req) {
+      if (!app || !app.req) {
         return;
       }
 
       // Don't change fully qualified urls
       if (!/^https?:\/\//.test(req.url)) {
-        req.url = getBaseUrl(context.req) + req.url;
+        req.url = getBaseUrl(app.req) + req.url;
       }
 
       // Add all headers from original request
@@ -48,7 +48,7 @@ module.exports = function (options) {
       }
 
       function headers() {
-        return _.omit(context.req.headers, HEADERS_TO_IGNORE);
+        return _.omit(app.req.headers, HEADERS_TO_IGNORE);
       }
     }
   });
@@ -65,17 +65,12 @@ module.exports = function (options) {
     }
 
     router.run(function (Handler, state) {
-      var context = Marty.createContext({req: req, res: res});
+      var app = new options.application({
+        req: req,
+        res: res
+      });
 
-      var renderOptions = {
-        type: Handler,
-        context: context,
-        props: state.params,
-        timeout: options.timeout
-      };
-
-      Marty
-        .renderToString(renderOptions)
+      app.renderToString(React.createElement(app.bindTo(Handler), state.params), options)
         .then(onRendered)
         .catch(onFailedToRender);
 

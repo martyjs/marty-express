@@ -1,12 +1,11 @@
 var React = require('react');
 var Marty = require('marty');
-var FooStore = require('../stores/fooStore');
 
 var RemoteFooStateMixin = Marty.createStateMixin({
-  listenTo: FooStore,
+  listenTo: 'fooStore',
   getState: function () {
     return {
-      foo: FooStore.for(this).getRemoteFoo(this.props.id)
+      foo: this.app.fooStore.getRemoteFoo(this.props.id)
     };
   }
 });

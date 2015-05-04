@@ -1,9 +1,7 @@
 var Marty = require('marty');
-var FooAPI = require('../sources/fooAPI');
 var FooConstants = require('../constants/fooConstants');
 
 var FooQueries = Marty.createQueries({
-  id: 'FooQueries',
   getFoo: function (id) {
     var self = this;
 
@@ -18,7 +16,7 @@ var FooQueries = Marty.createQueries({
     });
   },
   getRemoteFoo: function (id) {
-    return FooAPI.for(this).getFoo(id).then((function (res) {
+    return this.app.fooAPI.getFoo(id).then((function (res) {
       this.dispatch(FooConstants.RECIEVE_FOO, res.body);
     }).bind(this));
   }

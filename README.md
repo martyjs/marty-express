@@ -16,13 +16,19 @@ var routes = (
   </Route>
 );
 
+class IsomorphicApp extends Marty.Application {
+  constructor() {
+    this.register('userStore', require('./stores/userStore'));
+  }
+}
+
 var app = express();
 
 app.use(require('marty-express')({
   routes: routes, // required
+  application: IsomorphicApp, //required
   view: 'foo', // name of view to render, default: index
   local: 'bar', // name of local variable in view, default: body
-  marty: ..., // instance of Marty to use, default: require('marty')
 }));
 ```
 

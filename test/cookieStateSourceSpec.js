@@ -1,15 +1,18 @@
 var sinon = require('sinon');
+var Marty = require('marty');
 var expect = require('chai').expect;
 var middleware = require('../index');
 
 describe('CookieStateSource', function ( ) {
-  var Marty, source, expectedKey, expectedValue, req, res;
+  var source, expectedKey, expectedValue, req, res;
 
   beforeEach(function () {
-    Marty = require('marty').createInstance();
     expectedKey = 'foo';
 
-    middleware({ marty: Marty, routes: [] });
+    middleware({
+      routes: [],
+      application: Marty.Application
+    });
 
     req = { cookies: {} };
     req.cookies[expectedKey] = expectedValue;
@@ -19,10 +22,12 @@ describe('CookieStateSource', function ( ) {
       clearCookie: sinon.spy()
     };
 
-    source = Marty.createStateSource({
-      id: 'ServerCookies',
-      type: 'cookie',
-      context: {
+    var CookieSource = Marty.createStateSource({
+      type: 'cookie'
+    });
+
+    source = new CookieSource({
+      app: {
         req: req,
         res: res
       }

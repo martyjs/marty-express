@@ -1,9 +1,7 @@
 var Marty = require('marty');
-var FooQueries = require('../queries/fooQueries');
 var FooConstants = require('../constants/fooConstants');
 
 var FooStore = Marty.createStore({
-  id: 'foo',
   handlers: {
     addFoo: FooConstants.RECIEVE_FOO
   },
@@ -20,7 +18,7 @@ var FooStore = Marty.createStore({
         return this.state[id];
       },
       remotely: function () {
-        return FooQueries.for(this).getFoo(id);
+        return this.app.fooQueries.getFoo(id);
       }
     });
   },
@@ -31,7 +29,7 @@ var FooStore = Marty.createStore({
         return this.state[id];
       },
       remotely: function () {
-        return FooQueries.for(this).getRemoteFoo(id);
+        return this.app.fooQueries.getRemoteFoo(id);
       }
     });
   }

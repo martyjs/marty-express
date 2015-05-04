@@ -9,7 +9,8 @@ describe('Routes with marty', function () {
   beforeEach(function () {
     server = require('./fixtures/server')();
     server.use(marty({
-      routes: require('./fixtures/routes')()
+      routes: require('./fixtures/routes')(),
+      application: require('./fixtures/application')
     }));
 
     return server.start();

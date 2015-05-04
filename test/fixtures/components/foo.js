@@ -1,12 +1,11 @@
 var React = require('react');
 var Marty = require('marty');
-var FooStore = require('../stores/fooStore');
 
 var FooStateMixin = Marty.createStateMixin({
-  listenTo: FooStore,
+  listenTo: 'fooStore',
   getState: function () {
     return {
-      foo: FooStore.for(this).getFoo(this.props.id)
+      foo: this.app.fooStore.getFoo(this.props.id)
     };
   }
 });
