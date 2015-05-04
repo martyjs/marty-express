@@ -43,7 +43,7 @@
     "when": "^3.7.2"
   },
   "peerDependencies": {
-    "marty": "^0.10.0",
+    "marty": "*",
     "react-router": "^0.13.0"
   },
   "author": "James Hollingworth",
