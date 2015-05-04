@@ -1,6 +1,6 @@
 {
   "name": "marty-express",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "express.js middleware for Marty.js",
   "main": "index.js",
   "directories": {
@@ -43,7 +43,7 @@
     "when": "^3.7.2"
   },
   "peerDependencies": {
-    "marty": "^0.9.0",
+    "marty": "*",
     "react-router": "^0.13.0"
   },
   "author": "James Hollingworth",
