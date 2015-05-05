@@ -18,6 +18,10 @@ module.exports = function (options) {
     throw new Error('routes is required');
   }
 
+  if(!_.isFunction(options.application)) {
+    throw new Error('Must specify application type');
+  }
+
   Marty.CookieStateSource.setCookieFactory(function (app) {
     return new ServerCookies(app.req, app.res);
   });
