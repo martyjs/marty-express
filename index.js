@@ -31,6 +31,7 @@ module.exports = function (options) {
   });
 
   Marty.HttpStateSource.addHook({
+    id: 'marty-express-http-state-source',
     priority: 0.00000000001,
     before: function (req) {
       var app = this.app;
