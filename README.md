@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jhollingworth/marty-express.svg?branch=master)](https://travis-ci.org/jhollingworth/marty-express)
+[![Build Status](https://travis-ci.org/martyjs/marty-express.svg?branch=master)](https://travis-ci.org/martyjs/marty-express)
 
 [express](http://expressjs.com) middleware for building isomorphic applications with [Marty](http://martyjs.org) & [react-router](https://github.com/rackt/react-router).
 
@@ -63,4 +63,4 @@ make test           #Run tests
 
 ##License
 
-* [MIT](https://raw.github.com/jhollingworth/marty-express/master/LICENSE)
+* [MIT](https://raw.github.com/martyjs/marty-express/master/LICENSE)
