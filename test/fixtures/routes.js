@@ -1,3 +1,4 @@
+var Marty = require('marty');
 var React = require('react');
 var Router = require('react-router');
 var Foo = require('./components/foo');
@@ -19,24 +20,10 @@ var App = React.createClass({
 module.exports = function () {
   return (
     <Route name="root" handler={App}>
-      <Route name='foo' path='/foo/:id' handler={routeContainer(Foo)} />
-      <Route name='ping' path='/ping/:message' handler={routeContainer(Ping)} />
-      <Route name='remote-foo' path='/remote-foo/:id' handler={routeContainer(RemoteFoo)} />
+      <Route name='foo' path='/foo/:id' handler={Foo} />
+      <Route name='ping' path='/ping/:message' handler={Ping} />
+      <Route name='remote-foo' path='/remote-foo/:id' handler={RemoteFoo} />
       <Redirect from="/redirect" to="root" />
     </Route>
   );
 };
-
-
-function routeContainer(InnerComponent) {
-  return React.createClass({
-    contextTypes: {
-      router: React.PropTypes.func.isRequired
-    },
-    render: function () {
-      var params = this.context.router.getCurrentParams();
-
-      return <InnerComponent {...params} />;
-    }
-  });
-}

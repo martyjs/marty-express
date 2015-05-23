@@ -18,7 +18,7 @@ module.exports = function (options) {
     throw new Error('routes is required');
   }
 
-  if(!_.isFunction(options.application)) {
+  if (!_.isFunction(options.application)) {
     throw new Error('Must specify application type');
   }
 
@@ -75,7 +75,11 @@ module.exports = function (options) {
         res: res
       });
 
-      app.renderToString(React.createElement(app.bindTo(Handler), state.params), options)
+      var element = React.createElement(Marty.ApplicationContainer, { app: app },
+        React.createElement(Handler, state.params)
+      );
+
+      app.renderToString(element, options)
         .then(onRendered)
         .catch(onFailedToRender);
 

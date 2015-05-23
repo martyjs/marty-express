@@ -5,7 +5,7 @@ var FooStateMixin = Marty.createStateMixin({
   listenTo: 'fooStore',
   getState: function () {
     return {
-      foo: this.app.fooStore.getFoo(this.props.id)
+      foo: this.app.fooStore.getFoo(this.props.params.id)
     };
   }
 });
@@ -25,7 +25,7 @@ var Foo = React.createClass({
       }
     });
 
-    return <div id={this.props.id} className='foo'>{body}</div>;
+    return <div id={this.props.params.id} className='foo'>{body}</div>;
   }
 });
 

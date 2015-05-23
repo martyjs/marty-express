@@ -30,6 +30,7 @@
     "cheerio": "^0.18.0",
     "cookie-parser": "^1.3.3",
     "ejs": "^2.2.4",
+    "es6-promise": "^2.1.1",
     "jsxcs": "^0.2.1",
     "jsxhint": "^0.10.0",
     "marty": "^0.9.0",

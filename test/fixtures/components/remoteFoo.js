@@ -5,7 +5,7 @@ var RemoteFooStateMixin = Marty.createStateMixin({
   listenTo: 'fooStore',
   getState: function () {
     return {
-      foo: this.app.fooStore.getRemoteFoo(this.props.id)
+      foo: this.app.fooStore.getRemoteFoo(this.props.params.id)
     };
   }
 });
@@ -25,7 +25,7 @@ var RemoteFoo = React.createClass({
       }
     });
 
-    return <div id={this.props.id} className='foo'>{body}</div>;
+    return <div id={this.props.params.id} className='foo'>{body}</div>;
   }
 });
 
