@@ -1,4 +1,3 @@
-var Marty = require('marty');
 var React = require('react');
 var Router = require('react-router');
 var Foo = require('./components/foo');
