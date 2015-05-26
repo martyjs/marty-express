@@ -27,8 +27,8 @@ var app = express();
 app.use(require('marty-express')({
   routes: routes, // required
   application: IsomorphicApp, //required
-  view: 'foo', // name of view to render, default: index
-  local: 'bar', // name of local variable in view, default: body
+  body: 'body', // name of local body variable in view, default: body
+  state: 'state' // name of local state variable in view, default: state
 }));
 ```
 

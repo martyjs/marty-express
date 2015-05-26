@@ -33,7 +33,7 @@
     "es6-promise": "^2.1.1",
     "jsxcs": "^0.2.1",
     "jsxhint": "^0.10.0",
-    "marty": "^0.9.0",
+    "marty": "^0.10.0",
     "mocha": "^1.21.4",
     "mocha-spec-cov": "0.0.3",
     "react": "^0.13.0",
@@ -45,6 +45,7 @@
   },
   "peerDependencies": {
     "marty": "^0.10.0",
+    "react": "^0.13.0",
     "react-router": "^0.13.0"
   },
   "author": "James Hollingworth",
