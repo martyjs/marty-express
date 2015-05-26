@@ -21,8 +21,8 @@ var app = express();
 app.use(require('marty-express')({
   routes: routes, // required
   view: 'foo', // name of view to render, default: index
-  local: 'bar', // name of local variable in view, default: body
-  marty: ..., // instance of Marty to use, default: require('marty')
+  body: 'body', // name of local body variable in view, default: body
+  script: 'script' // name of local script variable in view, default: view
 }));
 ```
 

@@ -81,8 +81,10 @@ module.exports = function (options) {
 
       function onRendered(renderResult) {
         var locals = {};
-        var html = renderResult.html;
-        locals[options.local || 'body'] = html;
+
+        locals[options.body || 'body'] = renderResult.htmlBody.trim();
+        locals[options.state || 'state'] = renderResult.htmlState.trim();
+
         res.render(options.view || 'index', locals);
 
         if (_.isFunction(options.rendered)) {
