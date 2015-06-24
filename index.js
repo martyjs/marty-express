@@ -84,7 +84,7 @@ module.exports = function (options) {
         .catch(onFailedToRender);
 
       function onRendered(renderResult) {
-        var locals = {};
+        var locals = options.locals || {};
 
         locals[options.body || 'body'] = renderResult.htmlBody.trim();
         locals[options.state || 'state'] = renderResult.htmlState.trim();
