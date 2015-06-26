@@ -69,6 +69,14 @@ module.exports = function (options) {
       return next();
     }
 
+    if (options.blacklist) {
+      var blacklistMatched = false;
+      options.blacklist.forEach(function(re){
+        if (re.test(req.url)) blacklistMatched = true;
+      });
+      if (blacklistMatched) return next();
+    }
+
     router.run(function (Handler, state) {
       var app = new options.application({
         req: req,
