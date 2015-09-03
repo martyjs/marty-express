@@ -89,7 +89,8 @@ module.exports = function (options) {
         locals[options.body || 'body'] = renderResult.htmlBody.trim();
         locals[options.state || 'state'] = renderResult.htmlState.trim();
 
-        res.render(options.view || 'index', locals);
+        var notfound = _.find(state.routes, { isNotFound : true });
+        res.status(notfound ? 404 : 200).render(options.view || 'index', locals);
 
         if (_.isFunction(options.rendered)) {
           options.rendered(_.extend({
