@@ -69,6 +69,14 @@ module.exports = function (options) {
       return next();
     }
 
+    if (options.blacklist) {
+      var blacklistMatched = false;
+      options.blacklist.forEach(function(re){
+        if (re.test(req.url)) blacklistMatched = true;
+      });
+      if (blacklistMatched) return next();
+    }
+
     router.run(function (Handler, state) {
       var app = new options.application({
         req: req,
@@ -84,7 +92,7 @@ module.exports = function (options) {
         .catch(onFailedToRender);
 
       function onRendered(renderResult) {
-        var locals = {};
+        var locals = options.locals || {};
 
         locals[options.body || 'body'] = renderResult.htmlBody.trim();
         locals[options.state || 'state'] = renderResult.htmlState.trim();
